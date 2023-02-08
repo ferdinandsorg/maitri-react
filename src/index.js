@@ -1,13 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import Configurator from './components/Configurator';
+import Content from './components/Content';
 import reportWebVitals from './reportWebVitals';
+import Dragbar from './components/Dragbar';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Configurator />
+    <Dragbar />
+    <Content />
   </React.StrictMode>
 );
 
