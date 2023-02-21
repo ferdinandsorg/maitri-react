@@ -23,7 +23,7 @@ function WrapperContent() {
   if (!dataContent) {
     return <div>Loading...</div>;
   } else {
-    console.log("dataContent.body", dataContent.body);
+    // console.log("dataContent.body", dataContent.body);
     return (
       <div>
         <div className="flex flex-col gap-y-8">

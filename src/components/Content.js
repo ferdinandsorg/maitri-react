@@ -4,8 +4,6 @@ import LogoText from "./content/logo-text";
 import WrapperContent from "./content/wrapper-content";
 import CoFounders from "./content/co-founders";
 import Definitions from "./content/definitions";
-import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
-import ErrorPage from "./error-page";
 
 function Content({ mainPercentage, mainFontWdth }) {
   return (

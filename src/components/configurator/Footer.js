@@ -1,4 +1,5 @@
 import React from "react";
+import { Routes, Route } from "react-router-dom";
 
 const Footer = ({
   currentViewMode,
@@ -10,20 +11,8 @@ const Footer = ({
   currentShirtSize,
   updateShirtSize,
   currentShirtPrice,
+  motives,
 }) => {
-  // const colors = ["#2D2D2A", "#4E148C", "#55C1FF", "#715AFF", "#FF7F11"];
-
-  // const changeConfiguratorBackground = () => {
-  //   let randomColor = () => {
-  //     return Math.floor(Math.random() * colors.length);
-  //   };
-  //   let newColor;
-  //   do {
-  //     newColor = colors[randomColor()];
-  //   } while (newColor === currcentBgColor);
-  //   return colors[randomColor()];
-  // };
-
   const changeBgColor = (event) => {
     updateBgColor(event.target.value);
   };
@@ -45,16 +34,6 @@ const Footer = ({
       className += " btn-active";
     }
     return className;
-  };
-
-  const buyShirt = () => {
-    alert(
-      "I want a " +
-        currentShirtColor +
-        " Shirt in size " +
-        currentShirtSize +
-        ", please!"
-    );
   };
 
   return (
@@ -79,11 +58,6 @@ const Footer = ({
             onClick={() => updateViewMode("motive")}>
             🖼
           </button>
-          {/* <button
-          className="text-4xl"
-          onClick={() => updateColor(changeConfiguratorBackground())}>
-          🌈
-        </button> */}
           <label
             className="relative text-4xl cursor-pointer"
             htmlFor="change-background-color">
@@ -131,16 +105,57 @@ const Footer = ({
           </div>
 
           <div className="flex flex-row gap-1">
-            <button
-              className="btn whitespace-nowrap"
-              onClick={() => buyShirt()}>
-              Buy this shirt for {currentShirtPrice} €
-            </button>
+            <Routes>
+              {motives &&
+                motives.map((motive) => (
+                  <Route
+                    key={motive.slug.current}
+                    path={`/motive/${motive.slug.current}`}
+                    element={
+                      <Price
+                        motive={motive}
+                        shirt={{
+                          color: currentShirtColor,
+                          size: currentShirtSize,
+                        }}
+                      />
+                    }
+                  />
+                ))}
+            </Routes>
           </div>
         </div>
       </footer>
     </>
   );
 };
+
+const buyShirt = (motive, shirt) => {
+  alert(
+    "I want this " +
+      shirt.color +
+      " Shirt in size " +
+      shirt.size +
+      " with the Motive " +
+      motive.title +
+      " from Artist " +
+      motive.artist.name +
+      ", please!"
+  );
+};
+
+function Price({ motive, shirt }) {
+  if (!motive) {
+    return <button className="btn whitespace-nowrap">Loading...</button>;
+  } else {
+    return (
+      <button
+        className="btn whitespace-nowrap"
+        onClick={() => buyShirt(motive, shirt)}>
+        Buy this shirt for {motive.price} €
+      </button>
+    );
+  }
+}
 
 export default Footer;
