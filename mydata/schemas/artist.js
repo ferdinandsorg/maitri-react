@@ -1,7 +1,10 @@
+import {emoji} from '../emojiIcon.jsx'
+
 export default {
   name: 'artist',
   title: 'Artist',
   type: 'document',
+  icon: emoji('🧑‍🎨'),
   fields: [
     {
       name: 'name',

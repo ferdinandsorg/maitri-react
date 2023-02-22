@@ -2,8 +2,19 @@ import React, { useState, useEffect } from "react";
 import Configurator from "./components/Configurator";
 import Content from "./components/Content";
 import Dragbar from "./components/Dragbar";
+import client from "./sanityClient";
 
 function App() {
+  useEffect(() => {
+    const query = `*[_type == "header"][0]`;
+    client
+      .fetch(query)
+      .then((data) => {
+        document.title = data.title + " – " + data.description;
+      })
+      .catch(console.error);
+  }, []);
+
   const minFontWeight = 62;
   const maxFontWeight = 125;
   const [dragging, setDragging] = useState(false);

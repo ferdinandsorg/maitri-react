@@ -1,7 +1,9 @@
+import {emoji} from '../emojiIcon.jsx'
 export default {
   name: 'coFounder',
   title: 'Co-Founders',
   type: 'document',
+  icon: emoji('👩‍💻'),
   fields: [
     {
       name: 'name',
