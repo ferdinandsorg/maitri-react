@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import client from "../../sanityClient.js";
 import imageUrlBuilder from "@sanity/image-url";
+import Loading from "../Loading.js";
 
 function Motive({ motive }) {
   const builder = imageUrlBuilder(client);
@@ -9,7 +10,7 @@ function Motive({ motive }) {
   }
 
   if (!motive) {
-    return <div>Loading...</div>;
+    return <Loading />;
   } else {
     console.log("<Motive /> motive", motive);
     return (

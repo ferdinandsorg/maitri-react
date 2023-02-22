@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import client from "../../sanityClient.js";
+import Loading from "../Loading.js";
 
 function WrapperContent() {
   const [dataContent, setDataContent] = useState(null);
@@ -21,7 +22,7 @@ function WrapperContent() {
   }, []);
 
   if (!dataContent) {
-    return <div>Loading...</div>;
+    return <Loading />;
   } else {
     // console.log("dataContent.body", dataContent.body);
     return (

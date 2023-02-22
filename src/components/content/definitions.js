@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import client from "../../sanityClient.js";
+import Loading from "../Loading.js";
 
 function SanityContent() {
   const [data, setData] = useState(null);
@@ -19,7 +20,7 @@ function SanityContent() {
   }, []);
 
   if (!data) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   // console.log("data of definitions ", data);

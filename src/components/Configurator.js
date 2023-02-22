@@ -31,15 +31,6 @@ function Body({ motives }) {
             />
           ))}
       </Routes>
-
-      {selectedMotive && (
-        <div>
-          <p>Selected motive: {selectedMotive}</p>
-          <button onClick={() => setSelectedMotive(null)}>
-            Clear selection
-          </button>
-        </div>
-      )}
     </div>
   );
 }
