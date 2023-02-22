@@ -6,40 +6,37 @@ export default defineType({
   type: 'document',
   fields: [
     {
-      name: 'title',
-      title: 'Title',
-      type: 'string',
+      name: 'why',
+      title: 'Why',
+      type: 'blockContent',
     },
     {
-      name: 'slug',
-      title: 'Slug',
-      type: 'slug',
-      options: {
-        source: 'title',
-        maxLength: 96,
-      },
+      title: 'What',
+      name: 'what',
+      type: 'object',
+      fields: [
+        {
+          title: 'We are...',
+          name: 'weAre',
+          type: 'blockContent',
+        },
+        {
+          title: 'We are not...',
+          name: 'weAreNot',
+          type: 'blockContent',
+        },
+      ],
     },
     {
-      name: 'mainImage',
-      title: 'Main image',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
-    },
-    {
-      name: 'publishedAt',
-      title: 'Published at',
-      type: 'datetime',
-    },
-    {
-      name: 'body',
+      name: 'bodyText',
       title: 'Body',
+      description: 'This text will display under the "What" part.',
       type: 'blockContent',
     },
   ],
 
   preview: {
+    title: 'dings',
     select: {
       title: 'title',
       media: 'mainImage',

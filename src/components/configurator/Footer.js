@@ -140,7 +140,21 @@ const buyShirt = (motive, shirt) => {
       motive.title +
       " from Artist " +
       motive.artist.name +
-      ", please!"
+      ", please!\n\n 🛒 cart (1)\n" +
+      "shirt color: " +
+      shirt.color +
+      "\n" +
+      "shirt size: " +
+      shirt.size +
+      "\n" +
+      "motive: " +
+      motive.title +
+      "\n" +
+      "artist: " +
+      motive.artist.name +
+      "\n" +
+      "price: " +
+      motive.price
   );
 };
 

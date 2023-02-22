@@ -11,6 +11,7 @@ function viewShirt({ shirtColor, motive }) {
       return motivePersonBlack;
     }
   };
+
   return (
     <>
       <div

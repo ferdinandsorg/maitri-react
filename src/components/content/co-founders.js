@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import client from "../../sanityClient.js";
 import imageUrlBuilder from "@sanity/image-url";
+import Loading from "../Loading.js";
 import { useNavigate } from "react-router-dom";
 
 function SanityContent() {
@@ -32,7 +33,7 @@ function SanityContent() {
   }, []);
 
   if (!data) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   return (

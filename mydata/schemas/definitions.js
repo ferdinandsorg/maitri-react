@@ -1,7 +1,10 @@
+import {emoji} from '../emojiIcon.jsx'
+
 export default {
   name: 'definitions',
   title: 'Definitions',
   type: 'document',
+  icon: emoji('📚'),
   fields: [
     {
       name: 'term',

@@ -1,7 +1,10 @@
+import {emoji} from '../emojiIcon.jsx'
+
 export default {
   name: 'motive',
   title: 'Motive',
   type: 'document',
+  icon: emoji('🖼'),
   fields: [
     {
       name: 'title',
