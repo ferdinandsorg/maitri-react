@@ -1,39 +1,9 @@
 import React, { useState, useEffect } from "react";
-import ConfiguratorHeader from "./configurator/Header";
-import ConfiguratorFooter from "./configurator/Footer";
-import ViewPerson from "./configurator/viewPerson.js";
-import ViewShirt from "./configurator/viewShirt.js";
-import ViewMotive from "./configurator/viewMotive.js";
-import Motive from "./configurator/Motive";
 import client from "../sanityClient.js";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
-function Body({ motives }) {
-  const [selectedMotive, setSelectedMotive] = useState(null);
-
-  function handleMotiveSelect(motiveSlug) {
-    setSelectedMotive(motiveSlug);
-  }
-  return (
-    <div>
-      <Routes>
-        {motives &&
-          motives.map((motive) => (
-            <Route
-              key={motive.slug.current}
-              path={`/motive/${motive.slug.current}`}
-              element={
-                <Motive
-                  motive={motive}
-                  onSelect={() => handleMotiveSelect(motive.slug.current)}
-                />
-              }
-            />
-          ))}
-      </Routes>
-    </div>
-  );
-}
+import ConfiguratorHeader from "./configurator/Header";
+import ConfiguratorFooter from "./configurator/Footer";
+import ConfiguratorMain from "./configurator/Main";
 
 function Configurator({ sidebarPercentage, sidebarFontWdth, props }) {
   const [footerData, setFooterData] = useState({
@@ -70,25 +40,6 @@ function Configurator({ sidebarPercentage, sidebarFontWdth, props }) {
     setCurrentMotive(data);
   };
 
-  // let wiewMode;
-  // switch (footerData.viewMode) {
-  //   case "person":
-  //     wiewMode = (
-  //       <ViewPerson shirtColor={footerData.shirt.color} motive={motive.image} />
-  //     );
-  //     break;
-  //   case "shirt":
-  //     wiewMode = (
-  //       <ViewShirt shirtColor={footerData.shirt.color} motive={motive.image} />
-  //     );
-  //     break;
-  //   case "motive":
-  //     wiewMode = <ViewMotive motive={motive.image} />;
-  //     break;
-  //   default:
-  //     wiewMode = null;
-  // }
-
   return (
     <aside
       id="configurator"
@@ -98,12 +49,14 @@ function Configurator({ sidebarPercentage, sidebarFontWdth, props }) {
         width: `${sidebarPercentage}%`,
         fontVariationSettings: `'wdth' ${sidebarFontWdth}`,
       }}>
-      {/* <ConfiguratorHeader motiveMeta={motive} /> */}
-
       <BrowserRouter>
         <ConfiguratorHeader motives={motives} />
 
-        <Body motives={motives} />
+        <ConfiguratorMain
+          motives={motives}
+          view={footerData.viewMode}
+          shirtColor={footerData.shirt.color}
+        />
 
         <ConfiguratorFooter
           currentViewMode={footerData.viewMode}
