@@ -2,54 +2,81 @@ import React, { useState, useEffect } from "react";
 import client from "../../sanityClient.js";
 import Loading from "../Loading.js";
 import { PortableText } from "@portabletext/react";
+import Imprint from "./imprint.js";
 
 function SanityContent() {
   const currentYear = new Date().getFullYear();
-  const [meta, setMeta] = useState(null);
+  const [siteSettings, setsiteSettings] = useState(null);
   useEffect(() => {
-    const query = `*[_type == "header"][0]{
-      title
-    }`;
+    const query = `*[_type == "siteSettings"][0]`;
     client
       .fetch(query)
-      .then((data) => setMeta(data))
-      .catch(console.error);
-  }, []);
-  const [footer, setFooter] = useState(null);
-  useEffect(() => {
-    const query = `*[_type == "footer"][0]`;
-    client
-      .fetch(query)
-      .then((data) => setFooter(data))
+      .then((data) => setsiteSettings(data))
       .catch(console.error);
   }, []);
 
-  if (!footer) {
+  const [visible, setVisible] = useState(false);
+
+  const toggleVisibility = () => {
+    setVisible(!visible);
+  };
+
+  function Position(obj) {
+    var currenttop = 0;
+    if (obj.offsetParent) {
+      do {
+        currenttop += obj.offsetTop;
+      } while ((obj = obj.offsetParent));
+      return [currenttop];
+    }
+  }
+
+  const scrollToContent = () => {
+    setVisible(!visible);
+    setTimeout(() => {
+      document.getElementById("imprint").scrollIntoView({ behavior: "smooth" });
+    }, 100);
+  };
+
+  if (!siteSettings) {
     return <Loading />;
   } else {
-    // console.log(footer.bodyText);
     return (
       <footer>
         <div className="w-full mb-2">
-          <PortableText value={footer.bodyText} />
+          <PortableText value={siteSettings.footerText} />
         </div>
         <div className="w-full flex flex-row gap-2 items-start mb-8">
           <a
             className="btn btn-primary"
-            href={"https://instagram.com/" + footer.instagramUsername}
+            href={"https://instagram.com/" + siteSettings.instagramUsername}
             target="_blank">
-            Instagram @{footer.instagramUsername}
+            Instagram @{siteSettings.instagramUsername}
           </a>
-          <a className="btn btn-primary" href={"mailto:" + footer.email}>
-            {footer.email}
+          <a className="btn btn-primary" href={"mailto:" + siteSettings.email}>
+            {siteSettings.email}
+          </a>
+        </div>
+        <div className="flex justify-center mb-8">
+          <a
+            href="https://ferdinands.org"
+            target="_blank"
+            className="text-center inline-flex justify-center items-center px-6 py-2 bg-white rounded-full hover:bg-[#00f] hover:text-white transition-all">
+            Website made with <span className="text-2xl">🕺🏻</span> by Ferdinand
+            Sorg
           </a>
         </div>
         <div className="w-full flex flex-row justify-between justify-content-start">
-          <a href="./imprint">Imprint</a>
-          <p>
-            &copy; {currentYear} {meta.title}
-          </p>
+          <button onClick={scrollToContent}>Imprint</button>
+          {siteSettings ? (
+            <p>
+              &copy; {currentYear} {siteSettings.title}
+            </p>
+          ) : (
+            <Loading />
+          )}
         </div>
+        <div id="imprint">{visible && <Imprint />}</div>
       </footer>
     );
   }

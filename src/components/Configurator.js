@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ConfiguratorHeader from "./configurator/Header";
 import ConfiguratorFooter from "./configurator/Footer";
 import ConfiguratorMain from "./configurator/Main";
+import Aristlink from "./configurator/Artistlink.js";
 
 function Configurator({ sidebarPercentage, sidebarFontWdth, props }) {
   const [footerData, setFooterData] = useState({
@@ -40,6 +41,10 @@ function Configurator({ sidebarPercentage, sidebarFontWdth, props }) {
     setCurrentMotive(data);
   };
 
+  if (!motives) {
+    return "dings";
+  }
+
   return (
     <aside
       id="configurator"
@@ -49,40 +54,38 @@ function Configurator({ sidebarPercentage, sidebarFontWdth, props }) {
         width: `${sidebarPercentage}%`,
         fontVariationSettings: `'wdth' ${sidebarFontWdth}`,
       }}>
-      <BrowserRouter>
-        <ConfiguratorHeader motives={motives} />
+      <ConfiguratorHeader motives={motives} />
 
-        <ConfiguratorMain
-          motives={motives}
-          view={footerData.viewMode}
-          shirtColor={footerData.shirt.color}
-        />
+      <ConfiguratorMain
+        motives={motives}
+        view={footerData.viewMode}
+        shirtColor={footerData.shirt.color}
+      />
 
-        <ConfiguratorFooter
-          currentViewMode={footerData.viewMode}
-          updateViewMode={(newComponent) =>
-            updateFooterData("viewMode", newComponent)
-          }
-          currcentBgColor={footerData.bgColor}
-          updateBgColor={(newColor) => updateFooterData("bgColor", newColor)}
-          currentShirtColor={footerData.shirt.color}
-          updateShirtColor={(newShirtColor) =>
-            updateFooterData("shirt", {
-              ...footerData.shirt,
-              color: newShirtColor,
-            })
-          }
-          currentShirtSize={footerData.shirt.size}
-          updateShirtSize={(newShirtSize) =>
-            updateFooterData("shirt", {
-              ...footerData.shirt,
-              size: newShirtSize,
-            })
-          }
-          currentShirtPrice={0}
-          motives={motives}
-        />
-      </BrowserRouter>
+      <ConfiguratorFooter
+        currentViewMode={footerData.viewMode}
+        updateViewMode={(newComponent) =>
+          updateFooterData("viewMode", newComponent)
+        }
+        currcentBgColor={footerData.bgColor}
+        updateBgColor={(newColor) => updateFooterData("bgColor", newColor)}
+        currentShirtColor={footerData.shirt.color}
+        updateShirtColor={(newShirtColor) =>
+          updateFooterData("shirt", {
+            ...footerData.shirt,
+            color: newShirtColor,
+          })
+        }
+        currentShirtSize={footerData.shirt.size}
+        updateShirtSize={(newShirtSize) =>
+          updateFooterData("shirt", {
+            ...footerData.shirt,
+            size: newShirtSize,
+          })
+        }
+        currentShirtPrice={0}
+        motives={motives}
+      />
     </aside>
   );
 }

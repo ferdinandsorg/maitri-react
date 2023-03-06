@@ -3,6 +3,7 @@ import client from "../../sanityClient.js";
 import imageUrlBuilder from "@sanity/image-url";
 import Loading from "../Loading.js";
 import { useNavigate } from "react-router-dom";
+import { PortableText } from "@portabletext/react";
 
 function SanityContent() {
   const [data, setData] = useState(null);
@@ -32,34 +33,46 @@ function SanityContent() {
     fetchData();
   }, []);
 
-  if (!data) {
-    return <Loading />;
-  }
+  const [content, setContent] = useState(null);
+  useEffect(() => {
+    const query = `*[_type == "content"][1]`;
+    client
+      .fetch(query)
+      .then((data) => setContent(data))
+      .catch(console.error);
+  }, []);
 
-  return (
-    <div>
-      <h2 className="text-3xl font-bold mb-4">Co-Founders</h2>
-      <div className="flex flex-col gap-y-4">
-        {data.map((coFounder) => (
-          <div
-            key={coFounder.slug.current}
-            className="flex flex-row gap-4 items-center">
-            <img
-              src={urlFor(coFounder.avatar).width(150).height(150).url()}
-              className="rounded-full"
-            />
-            <div className="flex flex-col">
-              <h3 className="text-xl">
-                <span className="font-bold">{coFounder.name}</span> (
-                {coFounder.pronounce})
-              </h3>
-              <p>{coFounder.bio}</p>
+  if (!content && !data) {
+    return <Loading />;
+  } else {
+    return (
+      <div>
+        <h2 className="text-3xl font-bold mb-2">The Co-Founders</h2>
+        <div className="mb-4">
+          {/* <PortableText value={content.coFounderText} /> */}
+        </div>
+        <div className="flex flex-col gap-y-4">
+          {data.map((coFounder) => (
+            <div
+              key={coFounder.slug.current}
+              className="flex flex-row gap-4 items-center">
+              <img
+                src={urlFor(coFounder.avatar).width(150).height(150).url()}
+                className="rounded-full"
+              />
+              <div className="flex flex-col">
+                <h3 className="text-xl">
+                  <span className="font-bold">{coFounder.name}</span> (
+                  {coFounder.pronounce})
+                </h3>
+                <p>{coFounder.bio}</p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default SanityContent;

@@ -28,9 +28,15 @@ export default defineType({
       ],
     },
     {
-      name: 'bodyText',
-      title: 'Body',
+      name: 'whatText',
+      title: 'What Text',
       description: 'This text will display under the "What" part.',
+      type: 'blockContent',
+    },
+    {
+      name: 'coFounderText',
+      title: 'Co-Founder Text',
+      description: 'This text will display under the "Co-Founder" Headline.',
       type: 'blockContent',
     },
   ],
