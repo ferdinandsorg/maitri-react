@@ -3,10 +3,11 @@ import Configurator from "./components/Configurator";
 import Content from "./components/Content";
 import Dragbar from "./components/Dragbar";
 import client from "./sanityClient";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
   useEffect(() => {
-    const query = `*[_type == "header"][0]`;
+    const query = `*[_type == "siteSettings"][0]`;
     client
       .fetch(query)
       .then((data) => {
@@ -95,16 +96,18 @@ function App() {
 
   return (
     <>
-      <Configurator
-        sidebarFontWdth={sidebarFontWdth}
-        sidebarPercentage={sidebarPercentage}
-      />
-      <Dragbar
-        onMouseDown={() => setDragging(true)}
-        onMouseUp={handleMouseUp}
-        positionLeft={sidebarPercentage}
-      />
-      <Content mainFontWdth={mainFontWdth} mainPercentage={mainPercentage} />
+      <BrowserRouter>
+        <Configurator
+          sidebarFontWdth={sidebarFontWdth}
+          sidebarPercentage={sidebarPercentage}
+        />
+        <Dragbar
+          onMouseDown={() => setDragging(true)}
+          onMouseUp={handleMouseUp}
+          positionLeft={sidebarPercentage}
+        />
+        <Content mainFontWdth={mainFontWdth} mainPercentage={mainPercentage} />
+      </BrowserRouter>
     </>
   );
 }

@@ -43,6 +43,11 @@ module.exports = {
             color: "#fff",
           },
         },
+        "#content h3": {
+          fontWeight: "900",
+          fontSize: "1.5rem",
+          lineHeight: "2rem",
+        },
       });
     }),
   ],

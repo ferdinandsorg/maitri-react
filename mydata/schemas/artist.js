@@ -34,9 +34,10 @@ export default {
       },
     },
     {
-      name: 'instagram',
-      title: 'Instagram Username',
+      name: 'instagramUsername',
       type: 'string',
+      title: 'Instagram Username',
+      description: 'Without URL or @',
     },
     {
       name: 'email',

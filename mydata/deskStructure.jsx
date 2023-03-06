@@ -2,11 +2,15 @@ import {emoji} from './emojiIcon.jsx'
 
 export const myStructure = (S) =>
   S.list()
-    .title('Base')
+    .title('Content')
     .items([
+      ...S.documentTypeListItems().filter(
+        (listItem) => !['siteSettings', 'content'].includes(listItem.getId())
+      ),
+      S.divider(),
       S.listItem()
-        .title('Settings')
-        .icon(emoji('⚙️'))
+        .title('co dings')
+        .icon(emoji('-'))
         .child(
           S.list()
             // Sets a title for our new list
@@ -15,14 +19,11 @@ export const myStructure = (S) =>
             // Each will pull one of our new singletons
             .items([
               S.listItem()
-                .title('Header')
-                .icon(emoji('⬆️'))
-                .child(S.document().schemaType('header').documentId('header')),
-              S.listItem()
-                .title('Footer')
+                .title('text')
                 .icon(emoji('⬇️'))
-                .child(S.document().schemaType('footer').documentId('footer')),
-            ])
+                .child(S.document().schemaType('definitions').documentId('definitions')),
+            ]),
+          ...S.documentTypeListItems()
         ),
       S.divider(),
       S.listItem()
@@ -30,8 +31,8 @@ export const myStructure = (S) =>
         .icon(emoji('📄'))
         .child(S.document().schemaType('content').documentId('content')),
       S.divider(),
-      // We also need to remove the new singletons from the main list
-      ...S.documentTypeListItems().filter(
-        (listItem) => !['header', 'footer', 'content'].includes(listItem.getId())
-      ),
+      S.listItem()
+        .title('Site Settings')
+        .icon(emoji('⚙️'))
+        .child(S.document().schemaType('siteSettings').documentId('siteSettings')),
     ])

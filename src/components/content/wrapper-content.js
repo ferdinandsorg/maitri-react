@@ -25,7 +25,7 @@ function WrapperContent() {
         </div>
         <div>
           <h2 className="text-3xl font-bold mb-2">What</h2>
-          <div className="columns-2">
+          <div className="columns-2 mb-2">
             <div>
               <h3 className="text-2xl font-bold mb-2">We are...</h3>
               <PortableText value={content.what.weAre} />
@@ -35,9 +35,9 @@ function WrapperContent() {
               <PortableText value={content.what.weAreNot} />
             </div>
           </div>
-        </div>
-        <div>
-          <PortableText value={content.bodyText} />
+          <div>
+            <PortableText value={content.whatText} />
+          </div>
         </div>
       </main>
     );

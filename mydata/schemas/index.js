@@ -4,8 +4,7 @@ import contentBlocks from './content'
 import coFounder from './co-founder'
 import definitions from './definitions'
 import blockContent from './blockContent'
-import header from './header'
-import footer from './footer'
+import siteSettings from './siteSettings'
 export const schemaTypes = [
   motive,
   artist,
@@ -13,6 +12,5 @@ export const schemaTypes = [
   coFounder,
   definitions,
   blockContent,
-  footer,
-  header,
+  siteSettings,
 ]
