@@ -1,10 +1,5 @@
-import Breadcrumbs from "../newComponents/Breadcrumbs";
-import Motives from "../newComponents/Motives";
+import { NavLink, Outlet, useOutlet, useLoaderData } from "react-router-dom";
 
 export default function RootLayout() {
-  return (
-    <>
-      <Motives />
-    </>
-  );
+  return <Outlet />;
 }

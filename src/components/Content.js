@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import LogoImage from "./content/logo-image.js";
 import LogoText from "./content/logo-text";
-import WrapperContent from "./content/wrapper-content";
+import WrapperContent from "./content/WrapperContent";
 import CoFounders from "./content/co-founders";
 import Definitions from "./content/definitions";
 import client from "../sanityClient.js";
@@ -12,8 +12,7 @@ import Imprint from "./content/imprint.js";
 function Content({ mainPercentage, mainFontWdth }) {
   return (
     <main
-      id="content"
-      className="w-1/2 h-screen bg-white relative"
+      className="bg-white relative"
       style={{
         width: `${mainPercentage}%`,
         fontVariationSettings: `'wdth' ${mainFontWdth}`,
