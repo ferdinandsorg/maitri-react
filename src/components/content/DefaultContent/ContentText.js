@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import client from "../../sanityClient.js";
-import Loading from "../Loading.js";
+import client from "../../../sanityClient";
+import Loading from "../../Loading";
 import { PortableText } from "@portabletext/react";
 
-function WrapperContent() {
+function ContentText() {
   const [content, setContent] = useState(null);
   useEffect(() => {
     const query = `*[_type == "content"][1]`;
@@ -42,4 +42,4 @@ function WrapperContent() {
   );
 }
 
-export default WrapperContent;
+export default ContentText;

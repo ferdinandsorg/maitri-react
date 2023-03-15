@@ -6,7 +6,7 @@ function Dragbar({ onMouseDown, onMouseUp, positionLeft }) {
       id="dragbar"
       onMouseDown={onMouseDown}
       onMouseUp={onMouseUp}
-      className="group h-screen px-5 absolute top-0 left-1/2 -translate-x-2/4 z-50 cursor-col-resize"
+      className="group h-screen px-5 fixed top-0 left-1/2 -translate-x-2/4 z-50 cursor-col-resize"
       style={{ left: `${positionLeft}%` }}>
       <div className="h-screen transition-all w-[1px] bg-black shadow-2xl group-hover:w-[3px]"></div>
       <div className="flex flex-row bg-black absolute top-1/2 left-1/2 px-1 py-2 gap-px rounded-full -translate-x-1/2 -translate-y-1/2">

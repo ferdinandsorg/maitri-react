@@ -3,7 +3,8 @@ function LogoImage() {
     <a
       href="./"
       title="Maitri"
-      className="absolute top-4 left-1/2 -translate-x-2/4">
+      // className="absolute top-4 left-1/2 -translate-x-2/4">
+      className="sticky top-5 flex justify-center">
       <svg
         width="59"
         height="51"
