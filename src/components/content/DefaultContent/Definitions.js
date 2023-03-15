@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import client from "../../sanityClient.js";
-import Loading from "../Loading.js";
+import client from "../../../sanityClient";
+import Loading from "../../Loading";
 
-function SanityContent() {
+function Definitions() {
   const [data, setData] = useState(null);
 
   useEffect(() => {
@@ -40,4 +40,4 @@ function SanityContent() {
   );
 }
 
-export default SanityContent;
+export default Definitions;

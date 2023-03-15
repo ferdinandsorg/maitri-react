@@ -1,7 +1,9 @@
-import React, { useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { useState, useEffect } from "react";
+import client from "../../sanityClient";
+import Loading from "../Loading";
+import { useParams } from "react-router-dom";
 
-const Footer = ({
+const ConfiguratorFooter = ({
   currentViewMode,
   updateViewMode,
   currcentBgColor,
@@ -11,8 +13,8 @@ const Footer = ({
   currentShirtSize,
   updateShirtSize,
   currentShirtPrice,
-  motives,
 }) => {
+  const motive = { price: 30 };
   const changeBgColor = (event) => {
     updateBgColor(event.target.value);
   };
@@ -132,24 +134,13 @@ const Footer = ({
         </div>
 
         <div className="flex flex-row gap-1">
-          <Routes>
-            {motives &&
-              motives.map((motive) => (
-                <Route
-                  key={motive.slug.current}
-                  path={`/motive/${motive.slug.current}`}
-                  element={
-                    <Price
-                      motive={motive}
-                      shirt={{
-                        color: currentShirtColor,
-                        size: currentShirtSize,
-                      }}
-                    />
-                  }
-                />
-              ))}
-          </Routes>
+          <Price
+            motive={motive}
+            shirt={{
+              color: currentShirtColor,
+              size: currentShirtSize,
+            }}
+          />
         </div>
       </div>
     </footer>
@@ -184,18 +175,36 @@ const buyShirt = (motive, shirt) => {
   );
 };
 
-function Price({ motive, shirt }) {
-  if (!motive) {
-    return <button className="btn whitespace-nowrap">Loading...</button>;
-  } else {
+function Price({ shirt }) {
+  const [currentMotive, setCurrentMotive] = useState(null);
+  const { motiveSlug } = useParams();
+  useEffect(() => {
+    const query = `*[_type == "motive" && slug.current == "${motiveSlug}"] {
+      title,
+      artist->{name, slug},
+      price
+    }`;
+    client
+      .fetch(query)
+      .then((data) => setCurrentMotive(data[0]))
+      .catch(console.error);
+  }, [currentMotive]);
+
+  if (!currentMotive) {
     return (
-      <button
-        className="btn whitespace-nowrap"
-        onClick={() => buyShirt(motive, shirt)}>
-        Buy this shirt for {motive.price} €
+      <button className="btn whitespace-nowrap">
+        <Loading />
       </button>
     );
   }
+
+  return (
+    <button
+      className="btn whitespace-nowrap"
+      onClick={() => buyShirt(currentMotive, shirt)}>
+      Buy this shirt for {currentMotive.price} €
+    </button>
+  );
 }
 
-export default Footer;
+export default ConfiguratorFooter;

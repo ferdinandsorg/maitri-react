@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import client from "../sanityClient.js";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import ConfiguratorHeader from "./configurator/Header";
-import ConfiguratorFooter from "./configurator/Footer";
-import ConfiguratorMain from "./configurator/Main";
-import Aristlink from "./configurator/Artistlink.js";
+import { useState } from "react";
+import ConfiguratorHeader from "../configurator/ConfiguratorHeader";
+import ConfiguratorMain from "../configurator/ConfiguratorMain";
+import ConfiguratorFooter from "../configurator/ConfiguratorFooter";
 
-function Configurator({ sidebarPercentage, sidebarFontWdth, props }) {
+export default function ConfiguratorLayout({
+  sidebarPercentage,
+  sidebarFontWdth,
+}) {
   const [footerData, setFooterData] = useState({
     bgColor: "#E4C1F9",
     viewMode: "shirt",
@@ -16,52 +16,24 @@ function Configurator({ sidebarPercentage, sidebarFontWdth, props }) {
     },
   });
 
-  const [motives, setMotives] = useState(null);
-  useEffect(() => {
-    const query = `*[_type == "motive"] {
-      title,
-      slug,
-      image,
-      price,
-      artist->{name, slug}
-    }`;
-    client
-      .fetch(query)
-      .then((data) => setMotives(data))
-      .catch(console.error);
-  }, []);
-
   const updateFooterData = (field, value) => {
     setFooterData((prevData) => ({ ...prevData, [field]: value }));
   };
 
-  const [currentMotive, setCurrentMotive] = useState(null);
-  const handleCurrentMotive = (data) => {
-    // console.log("motive data is", data);
-    setCurrentMotive(data);
-  };
-
-  if (!motives) {
-    return "dings";
-  }
-
   return (
     <aside
       id="configurator"
-      className="w-1/2 p-5 bg-primary flex flex-col flex-nowrap justify-between min-h-screen relative"
+      className="w-1/2 p-5 bg-primary flex flex-col flex-nowrap justify-between h-screen max-h-screen min-h-screen sticky top-0"
       style={{
         backgroundColor: footerData.bgColor,
         width: `${sidebarPercentage}%`,
         fontVariationSettings: `'wdth' ${sidebarFontWdth}`,
       }}>
-      <ConfiguratorHeader motives={motives} />
-
+      <ConfiguratorHeader />
       <ConfiguratorMain
-        motives={motives}
         view={footerData.viewMode}
         shirtColor={footerData.shirt.color}
       />
-
       <ConfiguratorFooter
         currentViewMode={footerData.viewMode}
         updateViewMode={(newComponent) =>
@@ -84,10 +56,7 @@ function Configurator({ sidebarPercentage, sidebarFontWdth, props }) {
           })
         }
         currentShirtPrice={0}
-        motives={motives}
       />
     </aside>
   );
 }
-
-export default Configurator;
