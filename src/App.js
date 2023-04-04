@@ -8,7 +8,7 @@ import RootLayout from "./components/layout/RootLayout";
 import MotiveLayout from "./components/layout/MotiveLayout";
 import Artist from "./components/content/Artist";
 import Error from "./components/Error";
-import Imprint from "./components/content/Imprint";
+import Imprint from "./components/content/ImprintContent";
 import DefaultContent from "./components/content/DefaultContent";
 
 function App() {
