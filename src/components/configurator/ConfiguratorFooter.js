@@ -188,7 +188,7 @@ function Price({ shirt }) {
       .fetch(query)
       .then((data) => setCurrentMotive(data[0]))
       .catch(console.error);
-  }, [currentMotive]);
+  }, [currentMotive, motiveSlug]);
 
   if (!currentMotive) {
     return (

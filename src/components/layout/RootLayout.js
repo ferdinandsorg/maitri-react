@@ -15,7 +15,7 @@ export default function RootLayout() {
       .catch(console.error);
   }, []);
 
-  if (location.pathname == "/" && firstMotive) {
+  if (location.pathname === "/" && firstMotive) {
     return <Navigate to={"motive/" + firstMotive.slug.current} />;
   }
 

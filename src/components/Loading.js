@@ -19,10 +19,10 @@ function Loading() {
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      setIndex((index + 1) % emojis.length);
+      setIndex((prevIndex) => (prevIndex + 1) % emojis.length);
     }, 100);
     return () => clearTimeout(timeoutId);
-  }, [index]);
+  }, [emojis.length]);
 
   return <p>{emojis[index]}</p>;
 }

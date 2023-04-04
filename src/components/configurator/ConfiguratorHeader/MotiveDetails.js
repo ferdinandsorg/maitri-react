@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { NavLink, useParams, useLocation, useMatch } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import client from "../../../sanityClient";
 import Loading from "../../Loading";
 
@@ -23,7 +23,7 @@ export default function MotiveDetails() {
       .fetch(query)
       .then((data) => setCurrentMotive(data[0]))
       .catch(console.error);
-  }, [currentMotive]);
+  }, [currentMotive, motiveSlug]);
 
   if (!currentMotive) {
     return <Loading />;

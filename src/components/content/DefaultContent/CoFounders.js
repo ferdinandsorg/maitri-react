@@ -50,6 +50,7 @@ function CoFounder() {
               <img
                 src={urlFor(coFounder.avatar).width(150).height(150).url()}
                 className="rounded-full"
+                alt={coFounder.name}
               />
               <div className="flex flex-col">
                 <h3 className="text-xl">

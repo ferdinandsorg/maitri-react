@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
-import { NavLink, useParams, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import client from "../../sanityClient";
 import Loading from "../Loading";
 import MotiveDetails from "./ConfiguratorHeader/MotiveDetails";
 
 export default function ConfiguratorHeader() {
   const [motives, setMotives] = useState(null);
-  const { motiveSlug, artistSlug } = useParams();
   useEffect(() => {
     const query = `*[_type == "motive"] {
             title,
@@ -34,40 +33,40 @@ export default function ConfiguratorHeader() {
   );
 }
 
-function Meta({ motiveSlug }) {
-  const [currentMotive, setCurrentMotive] = useState(null);
-  useEffect(() => {
-    const query = `*[_type == "motive" && slug.current == "${motiveSlug}"] {
-      title,
-      artist->{name, slug}
-    }`;
-    client
-      .fetch(query)
-      .then((data) => setCurrentMotive(data[0]))
-      .catch(console.error);
-  }, [currentMotive]);
+// function Meta({ motiveSlug }) {
+//   const [currentMotive, setCurrentMotive] = useState(null);
+//   useEffect(() => {
+//     const query = `*[_type == "motive" && slug.current == "${motiveSlug}"] {
+//       title,
+//       artist->{name, slug}
+//     }`;
+//     client
+//       .fetch(query)
+//       .then((data) => setCurrentMotive(data[0]))
+//       .catch(console.error);
+//   }, [currentMotive]);
 
-  if (!currentMotive) {
-    return <Loading />;
-  }
+//   if (!currentMotive) {
+//     return <Loading />;
+//   }
 
-  return (
-    <>
-      <p className="font-bold md:whitespace-nowrap">{currentMotive.title}</p>
-      <p className="whitespace-nowrap">
-        by{" "}
-        <NavLink
-          className={({ isActive, isPending }) =>
-            isPending ? "pending" : isActive ? "active" : ""
-          }
-          to=""
-          key={currentMotive.artist.slug.current}>
-          {currentMotive.artist.name} Halo
-        </NavLink>
-      </p>
-    </>
-  );
-}
+//   return (
+//     <>
+//       <p className="font-bold md:whitespace-nowrap">{currentMotive.title}</p>
+//       <p className="whitespace-nowrap">
+//         by{" "}
+//         <NavLink
+//           className={({ isActive, isPending }) =>
+//             isPending ? "pending" : isActive ? "active" : ""
+//           }
+//           to=""
+//           key={currentMotive.artist.slug.current}>
+//           {currentMotive.artist.name} Halo
+//         </NavLink>
+//       </p>
+//     </>
+//   );
+// }
 
 function PrevNextMotive({ motives }) {
   const [currentMotiveIndex, setCurrentMotiveIndex] = useState(0);

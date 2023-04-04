@@ -39,6 +39,7 @@ function Motive({ motive, view, shirtColor }) {
           "px] " +
           className
         }
+        alt={motive.title}
       />
     );
   };
@@ -52,7 +53,6 @@ function Motive({ motive, view, shirtColor }) {
           <Image className={"w-1/2"} />
         </main>
       );
-      break;
     case "shirt":
       return (
         <main
@@ -61,14 +61,12 @@ function Motive({ motive, view, shirtColor }) {
           <Image className={"w-[40%]"} />
         </main>
       );
-      break;
     case "motive":
       return (
         <main className="w-full h-full max-h-[50%] bg-no-repeat bg-contain bg-center flex justify-center items-center">
           <Image className={"w-[80%] max-w-[1200px]"} />
         </main>
       );
-      break;
     default:
       return (
         <main className="w-full h-full max-h-[50%] bg-no-repeat bg-contain bg-center flex justify-center items-center">

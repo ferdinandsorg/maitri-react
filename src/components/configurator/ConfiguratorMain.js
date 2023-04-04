@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { NavLink, useLocation, useParams, Navigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import client from "../../sanityClient";
 import Loading from "../Loading";
 import imageUrlBuilder from "@sanity/image-url";
@@ -9,10 +9,6 @@ function ConfiguratorMain({ view, shirtColor }) {
   const { motiveSlug } = useParams();
   const [motive, setMotive] = useState(null);
   const [loading, setLoading] = useState(true);
-  const builder = imageUrlBuilder(client);
-  function urlFor(source) {
-    return builder.image(source);
-  }
 
   useEffect(() => {
     const getMotiveDetails = async (motiveSlug) => {

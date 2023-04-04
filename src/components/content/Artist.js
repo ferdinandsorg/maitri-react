@@ -1,11 +1,11 @@
-import { useParams, NavLink, useMatch } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import client from "../../sanityClient";
 import { useState, useEffect } from "react";
 import Loading from "../Loading";
 import imageUrlBuilder from "@sanity/image-url";
 
 function Artist() {
-  const { artistSlug, motiveSlug } = useParams();
+  const { artistSlug } = useParams();
   const [artist, setArtist] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -14,11 +14,11 @@ function Artist() {
     return builder.image(source);
   }
 
-  const [activeLink, setActiveLink] = useState(null);
+  // const [activeLink, setActiveLink] = useState(null);
 
-  const handleLink = (id) => () => {
-    setActiveLink((active) => (active === id ? null : id));
-  };
+  // const handleLink = (id) => () => {
+  //   setActiveLink((active) => (active === id ? null : id));
+  // };
 
   useEffect(() => {
     const getArtistDetails = async (artistSlug) => {
@@ -94,6 +94,7 @@ function Artist() {
       <img
         src={urlFor(artist.avatar).width(200).url()}
         className="mb-2 w-full"
+        alt={artist.name}
       />
       <p className="mb-6">{artist.bio}</p>
       <h3 className="text-2xl font-bold mb-2">Connect with {artist.name}</h3>
