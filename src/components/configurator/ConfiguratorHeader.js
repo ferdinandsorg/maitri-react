@@ -23,7 +23,7 @@ export default function ConfiguratorHeader() {
   }
 
   return (
-    <header className="w-full h-auto flex flex-row justify-between items-start">
+    <header className="w-full h-auto flex flex-row justify-between items-start gap-4">
       <div className="meta">
         <MotiveDetails />
       </div>

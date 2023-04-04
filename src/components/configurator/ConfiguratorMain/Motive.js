@@ -34,7 +34,10 @@ function Motive({ motive, view, shirtColor }) {
       <img
         src={urlFor(motive.image).width(imageSize).url()}
         className={
-          "max-h-full transition-all max-w-[" + imageSize + "px] " + className
+          "object-contain transition-all max-w-[" +
+          imageSize +
+          "px] " +
+          className
         }
       />
     );
@@ -61,14 +64,14 @@ function Motive({ motive, view, shirtColor }) {
       break;
     case "motive":
       return (
-        <main className="w-full h-full max-h-full bg-no-repeat bg-contain bg-center flex justify-center items-center">
+        <main className="w-full h-full max-h-[50%] bg-no-repeat bg-contain bg-center flex justify-center items-center">
           <Image className={"w-[80%] max-w-[1200px]"} />
         </main>
       );
       break;
     default:
       return (
-        <main className="w-full h-full max-h-full bg-no-repeat bg-contain bg-center flex justify-center items-center">
+        <main className="w-full h-full max-h-[50%] bg-no-repeat bg-contain bg-center flex justify-center items-center">
           <Image className={"w-[80%]"} />
         </main>
       );

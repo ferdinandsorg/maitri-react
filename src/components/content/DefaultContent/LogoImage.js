@@ -1,9 +1,11 @@
+import { NavLink, useParams } from "react-router-dom";
+
 function LogoImage() {
+  const { motiveSlug } = useParams();
   return (
-    <a
-      href="./"
+    <NavLink
+      to={motiveSlug ? "/motive/" + motiveSlug : "/"}
       title="Maitri"
-      // className="absolute top-4 left-1/2 -translate-x-2/4">
       className="sticky top-5 flex justify-center">
       <svg
         width="59"
@@ -20,7 +22,7 @@ function LogoImage() {
           fill="black"
         />
       </svg>
-    </a>
+    </NavLink>
   );
 }
 

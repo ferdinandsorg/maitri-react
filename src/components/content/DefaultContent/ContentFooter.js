@@ -24,7 +24,7 @@ function ContentFooter() {
       <div className="w-full mb-2">
         <PortableText value={siteSettings.footerText} />
       </div>
-      <div className="w-full flex flex-row gap-2 items-start mb-8">
+      <div className="w-full flex flex-row flex-wrap gap-2 items-start">
         <a
           className="btn btn-primary"
           href={"https://instagram.com/" + siteSettings.instagramUsername}
@@ -35,7 +35,7 @@ function ContentFooter() {
           {siteSettings.email}
         </a>
       </div>
-      <div className="flex justify-center mb-8">
+      <div className="flex justify-center my-14">
         <a
           href="https://ferdinands.org"
           target="_blank"

@@ -1,8 +1,11 @@
+import { NavLink, useParams } from "react-router-dom";
+
 function LogoText() {
+  const { motiveSlug } = useParams();
   return (
-    <a
+    <NavLink
+      to={motiveSlug ? "/motive/" + motiveSlug : "/"}
       className="flex justify-center -translate-y-[5px]"
-      href="./"
       title="Maitri">
       <svg
         width="242"
@@ -42,7 +45,7 @@ function LogoText() {
           </clipPath>
         </defs>
       </svg>
-    </a>
+    </NavLink>
   );
 }
 

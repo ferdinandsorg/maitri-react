@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, NavLink, useMatch } from "react-router-dom";
 import client from "../../sanityClient";
 import { useState, useEffect } from "react";
 import Loading from "../Loading";
@@ -13,6 +13,12 @@ function Artist() {
   function urlFor(source) {
     return builder.image(source);
   }
+
+  const [activeLink, setActiveLink] = useState(null);
+
+  const handleLink = (id) => () => {
+    setActiveLink((active) => (active === id ? null : id));
+  };
 
   useEffect(() => {
     const getArtistDetails = async (artistSlug) => {
@@ -48,6 +54,13 @@ function Artist() {
     return <div>Could not find that artist. Damn...</div>;
   }
 
+  // const useMatchPath = useMatch(
+  //   "motive/" + motiveSlug + "artist/" + motiveSlug.artist.slug.current
+  // );
+
+  // console.log("useMatchPath", useMatchPath);
+  // console.log("useMatchPath");
+
   return (
     // <div className="">
     //   <span className="btn">
@@ -66,9 +79,17 @@ function Artist() {
     <div>
       <header className="w-full h-auto flex flex-row justify-between items-start">
         <h2 className="text-3xl font-bold mb-2">{artist.name}</h2>
-        <Link className="btn" to={"/motive/" + motiveSlug}>
+        {/* <NavLink
+          className="btn"
+          to={"/motive/" + motiveSlug}
+          // to={
+          //   activeLink === artist.slug.current
+          //     ? "/"
+          //     : "artist/" + artist.slug.current
+          // }
+          onClick={handleLink(artist.slug.current)}>
           Close {artist.name}
-        </Link>
+        </NavLink> */}
       </header>
       <img
         src={urlFor(artist.avatar).width(200).url()}

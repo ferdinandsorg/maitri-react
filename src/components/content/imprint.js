@@ -1,5 +1,5 @@
 import client from "../../sanityClient";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Loading from "../Loading";
 import { PortableText } from "@portabletext/react";
 import { Link, useParams } from "react-router-dom";
