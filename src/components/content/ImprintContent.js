@@ -30,7 +30,7 @@ function Imprint() {
         </Link>
       </header>
       <article>
-        <PortableText value={imprint.imprintText} />
+        {imprint && <PortableText value={imprint.imprintText} />}
       </article>
     </>
   );
