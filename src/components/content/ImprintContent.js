@@ -21,20 +21,19 @@ function Imprint() {
     <Loading />;
   }
 
-  //   return (
-  //     <>
-  //       <header className="w-full h-auto flex flex-row justify-between items-start">
-  //         <h2 className="text-3xl font-bold mb-2">Imprint</h2>
-  //         <Link className="btn" to={"/motive/" + motiveSlug}>
-  //           Close Imprint
-  //         </Link>
-  //       </header>
-  //       <article>
-  //         <PortableText value={imprint.imprintText} />
-  //       </article>
-  //     </>
-  //   );
-  return "moin";
+  return (
+    <>
+      <header className="w-full h-auto flex flex-row justify-between items-start">
+        <h2 className="text-3xl font-bold mb-2">Imprint</h2>
+        <Link className="btn" to={"/motive/" + motiveSlug}>
+          Close Imprint
+        </Link>
+      </header>
+      <article>
+        <PortableText value={imprint.imprintText} />
+      </article>
+    </>
+  );
 }
 
 export default Imprint;
